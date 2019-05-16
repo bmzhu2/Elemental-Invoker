@@ -4,9 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Elemental Invoker</title>
+  <link rel="stylesheet" href="board.css">
+  <script src="main.js"></script>
 </head>
 <body>
+  <h1>Elemental Invoker</h1>
+  <div className="image-pool">
+    <img src="./images/earth.png" alt="earth" id="earth">
+    <img src="./images/water.png" alt="water" id="water">
+    <img src="./images/wind.png" alt="wind" id="wind">
+    <img src="./images/fire.png" alt="fire" id="fire">
+  </div>
+  <section class="board-section">
+    <canvas id="board-canvas" width="450" height="450"></canvas>
+    <div id="interact-board"></div>
+  </section>
   
 </body>
 </html>

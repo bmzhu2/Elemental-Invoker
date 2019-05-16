@@ -1,0 +1,32 @@
+.board-section {
+  height: 450px;
+  width: 450px;
+  border: 2px solid black;
+  position: relative;
+}
+
+#interact-board {
+  height: 450px;
+  width: 450px;
+  position: absolute;
+  top: 0;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  z-index: 1;
+}
+
+.piece {
+  width: 80px;
+  height: 80px;
+  margin: auto auto;
+  border-radius: 50%;
+}
+
+.piece:hover {
+  cursor: pointer;
+}
+
+.image-pool {
+  visibility: hidden;
+}
