@@ -1,15 +1,17 @@
 const Board = require('./board')
 
 class BoardView {
-  constructor(ctx, interactBoard) {
-    this.ctx = ctx;
+  constructor(boardCtx, screenCtx, interactBoard, grimoire) {
+    this.boardCtx = boardCtx;
+    this.screenCtx = screenCtx;
     this.interactBoard = interactBoard;
-    this.board = new Board(this.ctx, interactBoard);
+    this.grimoire = grimoire;
+    this.board = new Board(boardCtx, screenCtx, interactBoard, grimoire);
   }
 
   start() {
     const refresh = setInterval(() => {
-      this.board.draw(this.ctx);
+      this.board.draw();
     }, 5);
   }
 }

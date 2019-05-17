@@ -1,7 +1,48 @@
+html {
+  background: rgb(240,240,240);
+  min-height: 100%;
+}
+
+html * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body {
+  height: 100%;
+}
+
+#screen {
+  position: absolute;
+}
+
+#screen.show {
+  z-index: 10;
+}
+
+h1 {
+  text-align: center;
+  font-size: 30pt;
+  font-family: sans-serif;
+}
+
+.gameplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* BOARD */
+
 .board-section {
   height: 450px;
   width: 450px;
   border: 2px solid black;
+  border-radius: 15px;
   position: relative;
 }
 
@@ -28,5 +69,44 @@
 }
 
 .image-pool {
+  position: absolute;
   visibility: hidden;
+}
+
+/* GRIMOIRE */
+
+.spellbook {
+  position: relative;
+}
+
+.grimoire {
+  width: 723px;
+  height: 440px;
+  position: absolute;
+  top: 0;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  grid-template-columns: 11% 37% 3% 37% 12%;
+}
+
+#page-one {
+  grid-area: 2/2/2/2;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#page-two {
+  grid-area: 2/4/2/4;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.spell-name {
+  width: 150px;
+  height: 112px;
+  text-align: center;
+  line-height: 112px;
+  font-size: 20px;
 }

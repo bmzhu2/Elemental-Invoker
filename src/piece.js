@@ -7,6 +7,8 @@ class Piece {
     this.renderX = this.posX;
     this.renderY = this.posY;
     this.selected = false;
+    this.radius = 0;
+    this.fullRadius = 40;
 
     this.swap = this.swap.bind(this);
   }
@@ -44,12 +46,18 @@ class Piece {
       case "wind":
         if (Math.abs(otherPiece.position - this.position) === 6 || 
           Math.abs(otherPiece.position - this.position) === 4 ) {
-          return true
+          if (!(this.position % 5 === 4 && otherPiece.position % 5 === 0)
+            && !(this.position % 5 === 0 && otherPiece.position % 5 === 4)) {
+            return true
+          }
         }
         break;
       case "fire":
         if (Math.abs(otherPiece.position - this.position) === 1) {
-          return true
+          if(!(this.position % 5 === 4 && otherPiece.position % 5 === 0)
+            && !(this.position % 5 === 0 && otherPiece.position % 5 === 4)) {
+              return true
+            }
         }
         break;
       default:
@@ -67,12 +75,18 @@ class Piece {
       case "wind":
         if (Math.abs(otherPiece.position - this.position) === 6 ||
           Math.abs(otherPiece.position - this.position) === 4) {
-          return true
+          if (!(otherPiece.position % 5 === 4 && this.position % 5 === 0)
+            && !(otherPiece.position % 5 === 0 && this.position % 5 === 4)) {
+            return true
+          }
         }
         break;
       case "fire":
         if (Math.abs(otherPiece.position - this.position) === 1) {
-          return true
+          if (!(otherPiece.position % 5 === 4 && this.position % 5 === 0)
+            && !(otherPiece.position % 5 === 0 && this.position % 5 === 4)) {
+            return true
+          }
         }
         break;
       default:
@@ -86,23 +100,28 @@ class Piece {
     if(this.posX !== this.renderX || this.posY !== this.renderY) {
       this.move();
     }
+    if(this.radius < this.fullRadius) {
+      this.radius += 1;
+    }
+
     ctx.beginPath();
-    ctx.arc(this.renderX, this.renderY, 40, 0, 2 * Math.PI)
+    
+    ctx.arc(this.renderX, this.renderY, this.radius, 0, 2 * Math.PI)
 
     switch (this.piece) {
       case "earth":
         ctx.fillStyle = '#fdde33'
         break;
       case "water":
-        ctx.fillStyle = '#60d8fb'
+        // ctx.fillStyle = '#60d8fb'
+        ctx.fillStyle= 'cornflowerblue'
         break;
       case "wind":
-        ctx.fillStyle = '#8146da'
+        // ctx.fillStyle = '#8146da'
+        ctx.fillStyle = '#28a028'
         break;
       case "fire":
-        ctx.fillStyle = '#c33329'
-        break;
-      default:
+        ctx.fillStyle = '#db4136'
         break;
     }
 
@@ -112,7 +131,9 @@ class Piece {
       ctx.stroke();
     }
 
-    ctx.drawImage(document.getElementById(this.piece), this.renderX - 45, this.renderY - 45)
+    if(this.radius === this.fullRadius) {
+      ctx.drawImage(document.getElementById(this.piece), this.renderX - 45, this.renderY - 45)
+    }
   }
 
   move() {

@@ -9,17 +9,36 @@
   <script src="main.js"></script>
 </head>
 <body>
+  <canvas id="screen"></canvas>
   <h1>Elemental Invoker</h1>
-  <div className="image-pool">
-    <img src="./images/earth.png" alt="earth" id="earth">
-    <img src="./images/water.png" alt="water" id="water">
-    <img src="./images/wind.png" alt="wind" id="wind">
-    <img src="./images/fire.png" alt="fire" id="fire">
+  <div class="image-pool">
+    <img src="./images/earth2.png" alt="earth" id="earth">
+    <img src="./images/water2.png" alt="water" id="water">
+    <img src="./images/wind2.png" alt="wind" id="wind">
+    <img src="./images/fire2.png" alt="fire" id="fire">
+    <img src="./images/earth-small.png" alt="earth-small" id="earth-small">
+    <img src="./images/water-small.png" alt="water-small" id="water-small">
+    <img src="./images/wind-small.png" alt="wind-small" id="wind-small">
+    <img src="./images/fire-small.png" alt="fire-small" id="fire-small">
   </div>
-  <section class="board-section">
-    <canvas id="board-canvas" width="450" height="450"></canvas>
-    <div id="interact-board"></div>
+  <section class="gameplay">
+    <section class="board-section">
+      <canvas id="board-canvas" width="450" height="450"></canvas>
+      <div id="interact-board"></div>
+    </section>
+    <section class="spellbook">
+      <img src="./images/grimoire.png" alt="grimoire" id="grimoire">
+      <div class="grimoire" id="grimoire">
+        <div id="page-one">
+
+        </div>
+        <div id="page-two">
+
+        </div>
+      </div>
+    </section>
   </section>
+  
   
 </body>
 </html>
