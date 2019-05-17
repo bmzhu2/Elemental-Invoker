@@ -9,11 +9,7 @@ class BoardView {
     this.board = new Board(boardCtx, screenCtx, interactBoard, grimoire);
   }
 
-  start() {
-    const refresh = setInterval(() => {
-      this.board.draw();
-    }, 5);
-  }
+  
 }
 
 module.exports = BoardView;

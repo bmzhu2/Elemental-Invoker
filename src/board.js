@@ -1,5 +1,6 @@
 const Piece = require('./piece.js')
 const Grimoire = require('./grimoire.js')
+const Score = require('./score.js')
 
 class Board {
   constructor(boardCtx, screenCtx, interactBoard, grimoire) {
@@ -16,10 +17,25 @@ class Board {
     this.setupInteract(interactBoard);
     this.displaySpells();
 
+    this.score = new Score;
+    this.gameState = "normal";
+
     this.selecting = false;
     this.selectedPiece = null;
     this.selectingSpell = false;
     this.selectedSpell = null;
+  }
+
+  start() {
+    this.render = setInterval(() => {
+      this.draw();
+    }, 5);
+  }
+
+  end() {
+    this.gameState = 'over';
+    this.score.gameOver();
+    clearInterval(this.render);
   }
   
   populatePieces() {
@@ -45,9 +61,11 @@ class Board {
   }
 
   selectPiece(e){
-    this.selecting = true;
-    this.selectedPiece = this.pieces[e.target.dataset.position];
-    this.selectedPiece.selected = true;
+    if(this.gameState === "normal") {
+      this.selecting = true;
+      this.selectedPiece = this.pieces[e.target.dataset.position];
+      this.selectedPiece.selected = true;
+    }
   }
 
   trySwap(e) {
@@ -56,6 +74,7 @@ class Board {
       if (this.selectedPiece.swap(targetPiece)) {
         this.pieces[this.selectedPiece.position] = this.selectedPiece;
         this.pieces[targetPiece.position] = targetPiece;
+        this.score.resetCombo();
       }
     }
   }
@@ -68,7 +87,7 @@ class Board {
     this.selectedPiece = null;
     this.screenCtx.clearRect(0, 0, document.body.clientWidth, document.body.clientHeight);
     if(this.selectingSpell) {
-      if(e.type === "click") {
+      if(e.type === "click" && e.target.tagName !== "BODY") {
         this.selectingSpell = false;
         this.selectedSpell.selected = false;
         this.selectedSpell = null;
@@ -80,21 +99,52 @@ class Board {
   }
 
   dropOffSpell(e) {
-    this.selectingSpell = false;
-    this.selectedSpell.selected = false;
-    this.selectedSpell = null;
+    if(this.selectingSpell) {
+      let result = this.selectedSpell.cast(+e.target.dataset.position, this.pieces)
+
+      if(result) {
+        this.selectedSpell.newSpell(this.spells);
+        if(Math.floor(this.selectedSpell.slot / 3) === 0) {
+          Array.from(document.getElementById("page-one").children)[this.selectedSpell.slot * 2 + 1]
+            .innerHTML = this.selectedSpell.name
+        } else {
+          Array.from(document.getElementById("page-two").children)[(this.selectedSpell.slot - 3) * 2 + 1]
+            .innerHTML = this.selectedSpell.name
+        }
+        result.forEach(position => {
+          this.pieces[position].newPiece();
+        });
+
+        this.score.incrementCombo();
+        this.score.addScore(this.selectedSpell.slot % 3 + 3);
+        if (this.score.total === this.score.maxSpells) {
+          this.gameState = 'bonus';
+          setTimeout(this.end.bind(this), 15000);
+        }
+      }
+
+      this.selectingSpell = false;
+      this.selectedSpell.selected = false;
+      this.selectedSpell = null;
+    }
   }
 
   selectSpell(e) {
-    this.selectingSpell = true;
-    this.selectedSpell = this.spells[e.target.dataset.slot];
-    this.selectedSpell.selected = true;
-    this.screen.classList.add("show");
+    if(this.gameState != 'over') {
+      this.selectingSpell = true;
+      this.selectedSpell = this.spells[e.target.dataset.slot];
+      this.selectedSpell.selected = true;
+      this.screen.classList.add("show");
+      this.cursorDraw(e);
+    }
   }
 
   setupInteract(interactBoard) {
     document.addEventListener("mouseup", this.deselect.bind(this));
     document.addEventListener("click", this.deselect.bind(this));
+    while (interactBoard.firstChild) {
+      interactBoard.removeChild(interactBoard.firstChild)
+    }
     for (let i = 0; i < 25; i++) {
       const piece = document.createElement('div');
       piece.classList.add('piece');
@@ -109,6 +159,12 @@ class Board {
   displaySpells() {
     let page1 = document.getElementById("page-one");
     let page2 = document.getElementById("page-two");
+    while (page1.firstChild) {
+      page1.removeChild(page1.firstChild)
+    }
+    while (page2.firstChild) {
+      page2.removeChild(page2.firstChild)
+    }
 
     for (let i = 0; i < 6; i++) {
       const spellCanvas = document.createElement('canvas');

@@ -1,4 +1,4 @@
-const BoardView = require('./board_view.js')
+const Board = require('./board.js')
 
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mouseover", e => {
@@ -13,6 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const interactBoard = document.getElementById("interact-board");
   const grimoire = document.getElementById("grimoire");
   const boardCtx = canvas.getContext('2d');
-  const boardView = new BoardView(boardCtx, screenCtx, interactBoard, grimoire)
-  boardView.start();
+  const board = new Board(boardCtx, screenCtx, interactBoard, grimoire)
+  board.start();
 });

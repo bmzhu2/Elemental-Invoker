@@ -36,6 +36,17 @@ h1 {
   align-items: center;
 }
 
+/* SCOREBOARD */
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+}
+
+.scoreboard * {
+  margin: 0 50px 30px 50px;
+}
+
 /* BOARD */
 
 .board-section {
@@ -54,7 +65,7 @@ h1 {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 20% 20% 20% 20% 20%;
-  z-index: 1;
+  z-index: 5;
 }
 
 .piece {

@@ -13,6 +13,11 @@ class Piece {
     this.swap = this.swap.bind(this);
   }
 
+  newPiece() {
+    this.piece = Piece.randomPiece();
+    this.radius = 0;
+  }
+
   swap(otherPiece) {
     if(this.canSwap(otherPiece)) {
       let tempPos = this.position;
@@ -113,11 +118,9 @@ class Piece {
         ctx.fillStyle = '#fdde33'
         break;
       case "water":
-        // ctx.fillStyle = '#60d8fb'
         ctx.fillStyle= 'cornflowerblue'
         break;
       case "wind":
-        // ctx.fillStyle = '#8146da'
         ctx.fillStyle = '#28a028'
         break;
       case "fire":
@@ -154,7 +157,6 @@ class Piece {
         this.renderY = this.posY;
       }
     }
-
   }
 
   static randomPiece() {
