@@ -66,17 +66,23 @@ class Board {
       this.selectedPiece.selected = false;
     }
     this.selectedPiece = null;
-    this.selectingSpell = false;
-    if(this.selectedSpell) {
-      this.selectedSpell.selected = false;
-      this.screen.classList.remove("show");
-    }
-    this.selectedSpell = null;
     this.screenCtx.clearRect(0, 0, document.body.clientWidth, document.body.clientHeight);
+    if(this.selectingSpell) {
+      if(e.type === "click") {
+        this.selectingSpell = false;
+        this.selectedSpell.selected = false;
+        this.selectedSpell = null;
+      }
+
+      this.screen.classList.remove("show");
+      setTimeout(() => document.elementFromPoint(e.clientX, e.clientY).click(), 0);
+    }
   }
 
   dropOffSpell(e) {
-    debugger;
+    this.selectingSpell = false;
+    this.selectedSpell.selected = false;
+    this.selectedSpell = null;
   }
 
   selectSpell(e) {
@@ -88,13 +94,14 @@ class Board {
 
   setupInteract(interactBoard) {
     document.addEventListener("mouseup", this.deselect.bind(this));
+    document.addEventListener("click", this.deselect.bind(this));
     for (let i = 0; i < 25; i++) {
       const piece = document.createElement('div');
       piece.classList.add('piece');
       piece.dataset.position = i;
       piece.addEventListener("mousedown", this.selectPiece.bind(this))
       piece.addEventListener("mouseenter", this.trySwap.bind(this))
-      piece.addEventListener("mouseup", this.dropOffSpell.bind(this))
+      piece.addEventListener("click", this.dropOffSpell.bind(this))
       interactBoard.appendChild(piece);
     }
   }

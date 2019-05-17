@@ -1,3 +1,5 @@
+const SpellList = require('./spell_list.js')
+
 class Spell {
   constructor(slot, spellInfo) {
     this.slot = slot;
@@ -9,24 +11,27 @@ class Spell {
     this.maxRadius = 11;
   }
 
-  static random(cost, otherSpell1, otherSpell2) {
+  static random(cost, otherSpell) {
     let randomNum;
     switch (cost) {
       case 3:
         randomNum = Math.floor(Math.random() * 3) + 1; 
-        while ((otherSpell1 && (threeCost[randomNum].name === otherSpell1.name)) || 
-                (otherSpell2 && (threeCost[randomNum].name === otherSpell2.name ))) {
+        while ((otherSpell && (SpellList.threeCost[randomNum].name === otherSpell.name))) {
                   randomNum = Math.floor(Math.random() * 3) + 1;
                 }
-        return threeCost[randomNum]
+        return SpellList.threeCost[randomNum]
       case 4:
         randomNum = Math.floor(Math.random() * 2) + 1;
-        while (otherSpell1 && (fourCost[randomNum].name === otherSpell1.name)) {
+        while (otherSpell && (SpellList.fourCost[randomNum].name === otherSpell.name)) {
           randomNum = Math.floor(Math.random() * 2) + 1;
         }
-        return fourCost[randomNum]
+        return SpellList.fourCost[randomNum]
       case 5:
-        return fiveCost[Math.floor(Math.random() * 1) + 1]
+        randomNum = Math.floor(Math.random() * 10) + 1;
+        while (otherSpell && (SpellList.fiveCost[randomNum].name === otherSpell.name)) {
+          randomNum = Math.floor(Math.random() * 10) + 1;
+        }
+        return SpellList.fiveCost[randomNum]
     }
   }
 
@@ -138,68 +143,6 @@ class Spell {
       screenCtx.closePath();
       screenCtx.drawImage(document.getElementById(piece.type), posX - 53, posY - 73)
     });
-  }
-}
-
-const threeCost = {
-  1: {
-    name: 'Inferno',
-    anchor: {type: 'fire', dx: 2, dy: 1},
-    otherPieces: [
-      {type: 'fire', dx: -1, dy: 0},
-      {type: 'fire', dx: 1, dy: 0}
-    ]
-  },
-  2: {
-    name: 'Magma Storm',
-    anchor: {type: 'water', dx: 2, dy: 1},
-    otherPieces: [
-      {type: 'fire', dx: -1, dy: 0},
-      {type: 'fire', dx: 0, dy: 1}
-    ]
-  },
-  3: {
-    name: 'Mad Growth',
-    anchor: {type: 'water', dx: 2, dy: 1},
-    otherPieces: [
-      {type: 'wind', dx: 0, dy: -1},
-      {type: 'earth', dx: 0, dy: 1}
-    ]
-
-  }
-}
-
-const fourCost = {
-  1: {
-    name: 'Tempest',
-    anchor: {type: 'water', dx: 2, dy: 1},
-    otherPieces: [
-      {type: 'wind', dx: 0, dy: -1},
-      {type: 'wind', dx: 0, dy: 1},
-      {type: 'water', dx: 0, dy: 2}
-    ]
-  },
-  2: {
-    name: 'Mother Gaia',
-    anchor: {type: 'earth', dx: 1, dy: 1},
-    otherPieces: [
-      {type: 'earth', dx: 1, dy: 0},
-      {type: 'earth', dx: 0, dy: 1},
-      {type: 'earth', dx: 1, dy: 1},
-    ]
-  }
-}
-
-const fiveCost = {
-  1: {
-    name: 'Planetary',
-    anchor: {type: 'fire', dx: 2, dy: 3},
-    otherPieces: [
-      {type: 'fire', dx: -1, dy: 0},
-      {type: 'fire', dx: 1, dy: 0},
-      {type: 'wind', dx: 0, dy: -1},
-      {type: 'wind', dx: 0, dy: -2}
-    ]
   }
 }
 

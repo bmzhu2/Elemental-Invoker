@@ -1,4 +1,4 @@
-const BoardView = require('./board-view.js')
+const BoardView = require('./board_view.js')
 
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mouseover", e => {
