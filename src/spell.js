@@ -54,21 +54,24 @@ class Spell {
 
     const anchorX = anchorPos % 5;
     const anchorY = Math.floor(anchorPos / 5);
+    let flag;
 
     let positions = [anchorPos];
-
     this.otherPieces.forEach(piece => {
       if(anchorX + piece.dx > 4 || anchorX + piece.dx < 0 ||
         anchorY + piece.dy > 4 || anchorY + piece.dy < 0) {
-          return false;
+          flag = true;
       }
       const position = anchorX + piece.dx + (anchorY + piece.dy) * 5;
-      if (pieces[position].piece != piece.type) {
-        return false;
+      if (pieces[position].piece !== piece.type) {
+        flag = true;
       }
       positions.push(position)
     });
-
+    
+    if(flag) {
+      return false
+    }
     return positions
   }
 

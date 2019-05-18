@@ -5,8 +5,8 @@ class Score {
     this.combo = 0;
     this.comboDisplay = document.getElementById("combo");
     this.total = 0;
-    this.totalDisplay = document.getElementById("total");
-    this.maxSpells = 5;
+    this.totalDisplay = document.getElementById("total-count");
+    this.maxSpells = 20;
   }
 
   addScore(cost) {

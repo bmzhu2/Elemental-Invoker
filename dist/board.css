@@ -18,6 +18,7 @@ body {
 
 #screen {
   position: absolute;
+  z-index: -1;
 }
 
 #screen.show {
@@ -41,10 +42,20 @@ h1 {
 .scoreboard {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.scoreboard * {
-  margin: 0 50px 30px 50px;
+.scoreboard > * {
+  margin: 0 50px 20px 50px;
+}
+
+#total {
+  display: flex;
+  align-items: center;
+}
+
+#clock {
+  margin-left: 20px;
 }
 
 /* BOARD */

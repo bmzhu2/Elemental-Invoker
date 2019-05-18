@@ -13,6 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const interactBoard = document.getElementById("interact-board");
   const grimoire = document.getElementById("grimoire");
   const boardCtx = canvas.getContext('2d');
-  const board = new Board(boardCtx, screenCtx, interactBoard, grimoire)
+  const board = new Board(boardCtx, screenCtx, interactBoard, grimoire);
   board.start();
 });

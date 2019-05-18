@@ -1,6 +1,8 @@
 const Piece = require('./piece.js')
 const Grimoire = require('./grimoire.js')
 const Score = require('./score.js')
+const Timer = require('./timer.js')
+const Sounds = require('./sounds.js')
 
 class Board {
   constructor(boardCtx, screenCtx, interactBoard, grimoire) {
@@ -11,6 +13,7 @@ class Board {
     this.interactBoard = interactBoard;
     this.grimoire = grimoire;
     this.pieces = {};
+    this.validNeighbors = {};
     this.populatePieces();
     this.spells = {};
     this.spells = Grimoire.initialize(this.spells);
@@ -19,6 +22,8 @@ class Board {
 
     this.score = new Score;
     this.gameState = "normal";
+    this.timer = new Timer;
+    this.sounds = new Sounds;
 
     this.selecting = false;
     this.selectedPiece = null;
@@ -65,6 +70,8 @@ class Board {
       this.selecting = true;
       this.selectedPiece = this.pieces[e.target.dataset.position];
       this.selectedPiece.selected = true;
+
+      let neighbors = this.selectedPiece.getValidNeighbors(this.pieces);
     }
   }
 
@@ -96,6 +103,9 @@ class Board {
       this.screen.classList.remove("show");
       setTimeout(() => document.elementFromPoint(e.clientX, e.clientY).click(), 0);
     }
+    if(e.target.tagName === "BUTTON") {
+      setTimeout(() => document.elementFromPoint(e.clientX, e.clientY).click(), 0);
+    }
   }
 
   dropOffSpell(e) {
@@ -103,6 +113,7 @@ class Board {
       let result = this.selectedSpell.cast(+e.target.dataset.position, this.pieces)
 
       if(result) {
+        debugger;
         this.selectedSpell.newSpell(this.spells);
         if(Math.floor(this.selectedSpell.slot / 3) === 0) {
           Array.from(document.getElementById("page-one").children)[this.selectedSpell.slot * 2 + 1]
@@ -119,7 +130,7 @@ class Board {
         this.score.addScore(this.selectedSpell.slot % 3 + 3);
         if (this.score.total === this.score.maxSpells) {
           this.gameState = 'bonus';
-          setTimeout(this.end.bind(this), 15000);
+          this.timer.setTimer(this.end.bind(this), 15000);
         }
       }
 

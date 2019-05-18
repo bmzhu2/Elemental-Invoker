@@ -39,6 +39,10 @@ class Piece {
     return false;
   }
 
+  getValidNeighbors(pieces) {
+    
+  }
+
   canSwap(otherPiece) {
     switch (this.piece) {
       case "earth":

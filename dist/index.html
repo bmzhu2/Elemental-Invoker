@@ -14,7 +14,10 @@
   <section class="scoreboard">
     <div id="score">Score: 0</div>
     <div id="combo">Combo: 0</div>
-    <div id="total">Spells Cast: 0/5</div>
+    <div id="total">
+      <div id="total-count">Spells Cast: 0/20</div>
+      <canvas id="clock" width="30" height="30"></canvas>
+    </div>
   </section>
   <div class="image-pool">
     <img src="./images/earth2.png" alt="earth" id="earth">
@@ -43,6 +46,8 @@
       </div>
     </section>
   </section>
-  
 </body>
+  <section class="misc-controls">
+    <button id="audio-button">Play music</button>
+  </section>
 </html>
