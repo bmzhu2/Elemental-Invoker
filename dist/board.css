@@ -1,5 +1,14 @@
+@font-face {
+  font-family: 'TrajanPro-Regular';
+  src: url('TrajanPro-Regular.eot?#iefix') format('embedded-opentype'),  url('TrajanPro-Regular.otf')  format('opentype'),
+	     url('TrajanPro-Regular.woff') format('woff'), url('TrajanPro-Regular.ttf')  format('truetype'), url('TrajanPro-Regular.svg#TrajanPro-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
-  background: rgb(240,240,240);
+  background-image: url("./images/wood-desk-background-1.jpg");
+  background-size: cover;
   min-height: 100%;
 }
 
@@ -10,6 +19,9 @@ html * {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  color: black;
+  font-family: 'TrajanPro-Regular';
 }
 
 body {
@@ -28,7 +40,6 @@ body {
 h1 {
   text-align: center;
   font-size: 30pt;
-  font-family: sans-serif;
 }
 
 .gameplay {
@@ -39,6 +50,14 @@ h1 {
 
 /* SCOREBOARD */
 
+header {
+  margin: 0 auto 20px auto;
+  width: 800px;
+  padding: 20px;
+  background-image: url("./images/scroll_header.png");
+  background-repeat: no-repeat;
+}
+
 .scoreboard {
   display: flex;
   justify-content: center;
@@ -46,7 +65,7 @@ h1 {
 }
 
 .scoreboard > * {
-  margin: 0 50px 20px 50px;
+  margin: 0 50px;
 }
 
 #total {
@@ -63,6 +82,7 @@ h1 {
 .board-section {
   height: 450px;
   width: 450px;
+  background: tan;
   border: 2px solid black;
   border-radius: 15px;
   position: relative;
@@ -127,8 +147,40 @@ h1 {
 
 .spell-name {
   width: 150px;
-  height: 112px;
+  height: 82px;
   text-align: center;
-  line-height: 112px;
+  padding-top: 30px;
   font-size: 20px;
+}
+
+/* AUDIO */
+
+header {
+  position: relative;
+}
+
+#audio-button, #restart {
+  position: absolute;
+  top: 25%;
+  font-size: 12pt;
+
+  height: 120px;
+  width: 120px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  background-image: url("./images/crystal_ball.png");
+  background-size: cover;
+}
+
+#audio-button:focus, #restart:focus {
+  outline: 0;
+}
+
+#restart {
+  left: -20%;
+}
+
+#audio-button {
+  right: -15%;
 }

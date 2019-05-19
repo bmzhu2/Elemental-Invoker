@@ -7,6 +7,7 @@ class Piece {
     this.renderX = this.posX;
     this.renderY = this.posY;
     this.selected = false;
+    this.neighbor = false;
     this.radius = 0;
     this.fullRadius = 40;
 
@@ -40,7 +41,13 @@ class Piece {
   }
 
   getValidNeighbors(pieces) {
-    
+    let neighbors = []
+    for (let i = 0; i < 25; i++) {
+      if(this.position !== i && this.canSwap(pieces[i])) {
+        neighbors.push(i)
+      }
+    }
+    return neighbors;
   }
 
   canSwap(otherPiece) {
@@ -135,6 +142,12 @@ class Piece {
     ctx.fill();
     if(this.selected) {
       ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgb(120,120,120";
+      ctx.stroke();
+    }
+    if(this.neighbor) {
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "black";
       ctx.stroke();
     }
 

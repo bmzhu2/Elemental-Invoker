@@ -2,11 +2,14 @@ class Score {
   constructor(){
     this.score = 0;
     this.scoreDisplay = document.getElementById("score");
+    this.scoreDisplay.innerHTML = "Score: " + this.score;
     this.combo = 0;
     this.comboDisplay = document.getElementById("combo");
+    this.comboDisplay.innerHTML = "Combo: " + this.combo;
     this.total = 0;
     this.totalDisplay = document.getElementById("total-count");
-    this.maxSpells = 20;
+    this.maxSpells = 5;
+    this.totalDisplay.innerHTML = "Spells Cast: " + this.total + "/" + this.maxSpells;
   }
 
   addScore(cost) {

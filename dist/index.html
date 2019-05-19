@@ -10,15 +10,19 @@
 </head>
 <body>
   <canvas id="screen"></canvas>
-  <h1>Elemental Invoker</h1>
-  <section class="scoreboard">
-    <div id="score">Score: 0</div>
-    <div id="combo">Combo: 0</div>
-    <div id="total">
-      <div id="total-count">Spells Cast: 0/20</div>
-      <canvas id="clock" width="30" height="30"></canvas>
-    </div>
-  </section>
+  <header>
+    <button id="restart">Restart</button>
+    <h1>Elemental Invoker</h1>
+    <section class="scoreboard">
+      <div id="score"></div>
+      <div id="combo"></div>
+      <div id="total">
+        <div id="total-count"></div>
+        <canvas id="clock" width="30" height="30"></canvas>
+      </div>
+    </section>
+    <button id="audio-button"></button>
+  </header>
   <div class="image-pool">
     <img src="./images/earth2.png" alt="earth" id="earth">
     <img src="./images/water2.png" alt="water" id="water">
@@ -47,7 +51,4 @@
     </section>
   </section>
 </body>
-  <section class="misc-controls">
-    <button id="audio-button">Play music</button>
-  </section>
 </html>

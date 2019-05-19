@@ -2,18 +2,19 @@ const Piece = require('./piece.js')
 const Grimoire = require('./grimoire.js')
 const Score = require('./score.js')
 const Timer = require('./timer.js')
-const Sounds = require('./sounds.js')
 
 class Board {
-  constructor(boardCtx, screenCtx, interactBoard, grimoire) {
+  constructor(boardCtx, screenCtx, interactBoard, grimoire, sounds) {
     this.boardCtx = boardCtx;
     this.screen = document.getElementById("screen");
-    this.screen.addEventListener("mousemove", this.cursorDraw.bind(this))
+    this.cursorDraw = this.cursorDraw.bind(this);
+    this.deselect = this.deselect.bind(this);
+    this.screen.addEventListener("mousemove", this.cursorDraw);
     this.screenCtx = screenCtx;
     this.interactBoard = interactBoard;
     this.grimoire = grimoire;
     this.pieces = {};
-    this.validNeighbors = {};
+    this.neighbors = [];
     this.populatePieces();
     this.spells = {};
     this.spells = Grimoire.initialize(this.spells);
@@ -23,7 +24,7 @@ class Board {
     this.score = new Score;
     this.gameState = "normal";
     this.timer = new Timer;
-    this.sounds = new Sounds;
+    this.sounds = sounds;
 
     this.selecting = false;
     this.selectedPiece = null;
@@ -37,10 +38,22 @@ class Board {
     }, 5);
   }
 
+  stop() {
+    clearInterval(this.render);
+    this.screen.removeEventListener("mousemove", this.cursorDraw, false)
+    document.removeEventListener("mouseup", this.deselect, false);
+    document.removeEventListener("click", this.deselect, false);
+  }
+
   end() {
     this.gameState = 'over';
     this.score.gameOver();
     clearInterval(this.render);
+    this.sounds.gameState = 'over'
+    if(!this.sounds.muted) {
+      this.sounds.song.pause();
+      this.sounds.victory.play();
+    }
   }
   
   populatePieces() {
@@ -71,7 +84,10 @@ class Board {
       this.selectedPiece = this.pieces[e.target.dataset.position];
       this.selectedPiece.selected = true;
 
-      let neighbors = this.selectedPiece.getValidNeighbors(this.pieces);
+      this.neighbors = this.selectedPiece.getValidNeighbors(this.pieces);
+      this.neighbors.forEach(position => {
+        this.pieces[position].neighbor = true;
+      })
     }
   }
 
@@ -82,6 +98,13 @@ class Board {
         this.pieces[this.selectedPiece.position] = this.selectedPiece;
         this.pieces[targetPiece.position] = targetPiece;
         this.score.resetCombo();
+        this.neighbors.forEach(position => {
+          this.pieces[position].neighbor = false;
+        })
+        this.neighbors = this.selectedPiece.getValidNeighbors(this.pieces);
+        this.neighbors.forEach(position => {
+          this.pieces[position].neighbor = true;
+        })
       }
     }
   }
@@ -90,6 +113,10 @@ class Board {
     this.selecting = false;
     if(this.selectedPiece) {
       this.selectedPiece.selected = false;
+      this.neighbors.forEach(position => {
+        this.pieces[position].neighbor = false;
+      })
+      this.neighbors = []
     }
     this.selectedPiece = null;
     this.screenCtx.clearRect(0, 0, document.body.clientWidth, document.body.clientHeight);
@@ -113,7 +140,6 @@ class Board {
       let result = this.selectedSpell.cast(+e.target.dataset.position, this.pieces)
 
       if(result) {
-        debugger;
         this.selectedSpell.newSpell(this.spells);
         if(Math.floor(this.selectedSpell.slot / 3) === 0) {
           Array.from(document.getElementById("page-one").children)[this.selectedSpell.slot * 2 + 1]
@@ -131,6 +157,10 @@ class Board {
         if (this.score.total === this.score.maxSpells) {
           this.gameState = 'bonus';
           this.timer.setTimer(this.end.bind(this), 15000);
+        }
+        
+        if(!this.sounds.muted) {
+          this.sounds.sfx.play()
         }
       }
 
@@ -151,8 +181,8 @@ class Board {
   }
 
   setupInteract(interactBoard) {
-    document.addEventListener("mouseup", this.deselect.bind(this));
-    document.addEventListener("click", this.deselect.bind(this));
+    document.addEventListener("mouseup", this.deselect);
+    document.addEventListener("click", this.deselect);
     while (interactBoard.firstChild) {
       interactBoard.removeChild(interactBoard.firstChild)
     }

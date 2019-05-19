@@ -12,7 +12,7 @@ SpellList.threeCost = {
     ]
   },
   2: {
-    name: 'Magma Storm',
+    name: 'Molten Bath',
     anchor: { type: 'water', dx: 2, dy: 1 },
     otherPieces: [
       { type: 'fire', dx: -1, dy: 0 },
