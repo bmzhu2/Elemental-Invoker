@@ -139,21 +139,21 @@ class Spell {
     screenCtx.clearRect(0, 0, document.body.clientWidth, document.body.clientHeight);
     screenCtx.beginPath();
 
-    screenCtx.arc(e.clientX - 8, e.clientY - 28, 40, 0, 2 * Math.PI);
+    screenCtx.arc(e.clientX - 8, e.clientY - 12, 40, 0, 2 * Math.PI);
     screenCtx.fillStyle = this.colorByType(this.anchor.type);
     screenCtx.fill();
     screenCtx.closePath();
-    screenCtx.drawImage(document.getElementById(this.anchor.type), e.clientX-53, e.clientY-73)
+    screenCtx.drawImage(document.getElementById(this.anchor.type), e.clientX-53, e.clientY-57)
 
     this.otherPieces.forEach(piece => {
       let posX = e.clientX + 90 * piece.dx;
       let posY = e.clientY + 90 * piece.dy;
       screenCtx.beginPath();
-      screenCtx.arc(posX - 8, posY - 28, 40, 0, 2 * Math.PI);
+      screenCtx.arc(posX - 8, posY - 12, 40, 0, 2 * Math.PI);
       screenCtx.fillStyle =this.colorByType(piece.type);
       screenCtx.fill();
       screenCtx.closePath();
-      screenCtx.drawImage(document.getElementById(piece.type), posX - 53, posY - 73)
+      screenCtx.drawImage(document.getElementById(piece.type), posX - 53, posY - 57)
     });
   }
 

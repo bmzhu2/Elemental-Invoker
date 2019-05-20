@@ -22,5 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     board.stop();
     board = new Board(boardCtx, screenCtx, interactBoard, grimoire, sounds);
     board.start();
+    sounds.gameState = 'normal'
+    if (!sounds.muted) {
+      sounds.victory.pause();
+      sounds.song.load();
+      sounds.song.play();
+    }
   })
 });

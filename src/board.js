@@ -157,6 +157,9 @@ class Board {
         if (this.score.total === this.score.maxSpells) {
           this.gameState = 'bonus';
           this.timer.setTimer(this.end.bind(this), 15000);
+          if (!this.sounds.muted) {
+            this.sounds.bonus.play();
+          }
         }
         
         if(!this.sounds.muted) {
