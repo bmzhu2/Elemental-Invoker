@@ -196,6 +196,16 @@ header {
   background-size: cover;
 }
 
+.instructions > h2 {
+  margin-top: 5vw;
+}
+
+.instructions > h3 {
+  margin-top: 5vw;
+  font-weight: bold;
+  text-align: end;
+}
+
 .instructions > img {
   display: block;
   margin: 0 auto;
