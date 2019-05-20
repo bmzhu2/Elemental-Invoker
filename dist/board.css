@@ -110,7 +110,7 @@ header {
   cursor: pointer;
 }
 
-.image-pool {
+.image-pool-small {
   position: absolute;
   visibility: hidden;
 }
@@ -183,4 +183,46 @@ header {
 
 #audio-button {
   right: -15%;
+}
+
+/* INSTRUCTIONS */
+
+.instructions {
+  width: 80vw;
+  margin: 3vw auto;
+  padding: 2vw 5vw 5vw 2vw;
+  border-radius: 4px;
+  background-image: url("./images/parchment.jpg");
+  background-size: cover;
+}
+
+.instructions > img {
+  display: block;
+  margin: 0 auto;
+}
+
+.image-pool {
+  display: flex;
+  justify-content: center;
+}
+
+.image-pool > * {
+  margin: 0 2vw;
+  border-radius: 50%;
+}
+
+#earth {
+  background-color: #fdde33;
+}
+
+#fire {
+  background-color: #db4136;
+}
+
+#wind {
+  background-color: #28a028;
+}
+
+#water {
+  background-color: cornflowerblue;
 }

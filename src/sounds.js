@@ -8,7 +8,7 @@ class Sounds {
     this.toggle = this.toggle.bind(this)
     this.playAudio.addEventListener("click", this.toggle);
 
-    this.bonus = new Audio('../dist/audio/venus_lighthouse.mp3');
+    this.bonus = new Audio('../dist/audio/142.wav');
     this.victory = new Audio('../dist/audio/victory.mp3');
 
     this.sfx = new Audio('../dist/audio/131.wav')

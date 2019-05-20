@@ -23,11 +23,7 @@
     </section>
     <button id="audio-button"></button>
   </header>
-  <div class="image-pool">
-    <img src="./images/earth2.png" alt="earth" id="earth">
-    <img src="./images/water2.png" alt="water" id="water">
-    <img src="./images/wind2.png" alt="wind" id="wind">
-    <img src="./images/fire2.png" alt="fire" id="fire">
+  <div class="image-pool-small">
     <img src="./images/earth-small.png" alt="earth-small" id="earth-small">
     <img src="./images/water-small.png" alt="water-small" id="water-small">
     <img src="./images/wind-small.png" alt="wind-small" id="wind-small">
@@ -41,14 +37,30 @@
     <section class="spellbook">
       <img src="./images/grimoire.png" alt="grimoire" id="grimoire">
       <div class="grimoire" id="grimoire">
-        <div id="page-one">
-
-        </div>
-        <div id="page-two">
-
-        </div>
+        <div id="page-one"></div>
+        <div id="page-two"></div>
       </div>
     </section>
+  </section>
+  <section class="instructions">
+    <h1>How to Play</h1>
+    <h2>Objective: </h2>
+      <p>The objective of the game is to arrange the pieces on the board into formations seen in the grimoire to the right. Cast spells to score points and build up a combo for even more points.</p>
+      <p>Once you cast a total of 10 spells, there is a bonus round where you may cast as many spells as possible in 15 seconds, but pieces can no longer be moved. After the bonus round, the game is over.</p>
+    <h2>Moving Pieces: </h2>
+      <p>Move pieces by clicking and dragging them and swapping them with valid adjacent neighbors. The selected piece is highlighted in gray, while valid move options are highlighted in black.</p>
+      <div class="image-pool">
+        <img src="./images/earth2.png" alt="earth" id="earth">
+        <img src="./images/water2.png" alt="water" id="water">
+        <img src="./images/wind2.png" alt="wind" id="wind">
+        <img src="./images/fire2.png" alt="fire" id="fire">
+      </div>
+      <p>There are four different types of pieces, each with a different movement direction denoted by gray arrows around their symbol. Two pieces are eligible to be swapped if either of their movement properties allow it.</p>
+    <h2>Casting Spells: </h2>
+      <p>Cast spells by clicking and dragging any of the small formation of elements in the grimoire, then matching it with the same formation on the board. You will likely have to arrange pieces on the board first in order to cast any spells. After successfully casting a spell, a new spell is put in the grimoire and new pieces are put on the board where the spell was cast.</p>
+      <img src="./images/spellcast.gif">
+    <h2>Scoring: </h2>
+      <p>Score points whenever you cast a spell, based on the amount of elements in the spell multiplied by your combo count. Build up your combo by casting multiple spells in a row without moving pieces in between.</p>
   </section>
 </body>
 </html>

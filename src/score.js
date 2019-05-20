@@ -8,7 +8,7 @@ class Score {
     this.comboDisplay.innerHTML = "Combo: " + this.combo;
     this.total = 0;
     this.totalDisplay = document.getElementById("total-count");
-    this.maxSpells = 5;
+    this.maxSpells = 10;
     this.totalDisplay.innerHTML = "Spells Cast: " + this.total + "/" + this.maxSpells;
   }
 
