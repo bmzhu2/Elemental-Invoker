@@ -15,7 +15,6 @@ class Sounds {
   }
 
   toggle() {
-    // debugger;
     if(this.muted) {
       this.muted = false;
       if(this.gameState === 'normal') {
