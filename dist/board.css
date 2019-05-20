@@ -7,7 +7,7 @@
 }
 
 html {
-  background-image: url("./images/wooden-desk-wallpaper-15.jpg");
+  background-image: url("../images/wooden-desk-wallpaper-15.jpg");
   background-size: cover;
   min-height: 100%;
 }
@@ -54,7 +54,7 @@ header {
   margin: 0 auto 20px auto;
   width: 800px;
   padding: 20px;
-  background-image: url("./images/scroll_header.png");
+  background-image: url("../images/scroll_header.png");
   background-repeat: no-repeat;
 }
 
@@ -169,7 +169,7 @@ header {
   border: none;
   border-radius: 50%;
   background: transparent;
-  background-image: url("./images/crystal_ball.png");
+  background-image: url("../images/crystal_ball.png");
   background-size: cover;
 }
 
@@ -192,7 +192,7 @@ header {
   margin: 3vw auto;
   padding: 2vw 5vw 5vw 2vw;
   border-radius: 4px;
-  background-image: url("./images/parchment.jpg");
+  background-image: url("../images/parchment.jpg");
   background-size: cover;
 }
 

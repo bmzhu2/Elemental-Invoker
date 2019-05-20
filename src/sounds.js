@@ -2,16 +2,16 @@ class Sounds {
   constructor() {
     this.muted = true;
     this.gameState = 'normal';
-    this.song = new Audio('../dist/audio/elemental_stars.mp3');
+    this.song = new Audio('dist/audio/elemental_stars.mp3');
     this.playAudio = document.getElementById("audio-button");
     this.playAudio.innerHTML = "Sound On";
     this.toggle = this.toggle.bind(this)
     this.playAudio.addEventListener("click", this.toggle);
 
-    this.bonus = new Audio('../dist/audio/142.wav');
-    this.victory = new Audio('../dist/audio/victory.mp3');
+    this.bonus = new Audio('dist/audio/venus_lighthouse.mp3');
+    this.victory = new Audio('dist/audio/victory.mp3');
 
-    this.sfx = new Audio('../dist/audio/131.wav')
+    this.sfx = new Audio('dist/audio/131.wav')
   }
 
   toggle() {
