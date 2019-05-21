@@ -29,7 +29,7 @@ body {
 }
 
 #screen {
-  position: absolute;
+  position: fixed;
   z-index: -1;
 }
 
