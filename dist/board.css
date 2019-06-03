@@ -236,3 +236,18 @@ header {
 #water {
   background-color: cornflowerblue;
 }
+
+/* FOOTER */
+
+footer {
+  padding-top: 5vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer a {
+  display: block;
+  text-decoration: none;
+  font-size: 3em;
+  margin: 0 2vw;
+}
