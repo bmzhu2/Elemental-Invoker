@@ -16,6 +16,28 @@ This game was built using only Javascript, vanilla DOM, and HTML Canvas.
 
 When moving pieces on the board, a smooth sliding experience when dragging and swapping pieces was prioritized. One of the earliest problems encountered when creating the game was implementing this feature. The solution that was decided upon was to use two layers of HTML elements to handle this: a board object with many piece instances that handled the actual swapping event and logic, while a canvas layer on top rendered the visual swapping. As a result, players do not need to wait for a piece to visually finish swapping in order to continue moving, so the player can make a long sequence of moves if desired without sacrificing any smoothness in the visual transition.
 
+In addition to the movement, the setting of a piece on the board is also animated. The radius of the piece starts off at 0, and while the radius is less than the intended radius, it gets a little bigger with each rerender until it is fully realized.
+
+```
+//summary of piece spawn animation
+class Piece {
+    constructor(position) {
+        /* misc code */
+        this.radius = 0;
+        this.fullRadius = 40;
+    }
+    
+    //draw is called in a rapid interval
+    draw(ctx) {
+        if(this.radius < this.fullRadius) {
+          this.radius += 1;
+        }
+        
+        //rest of render code
+    }
+}
+```
+
 ### Drag & Drop for spell-casting
 
 When grabbing a spell from the grimoire, you can drop the spell onto the board where the pieces line up. The logic for both rendering the spell piece formations and determining a valid spell cast were done by structuring a spell to have an "anchor" element and represent the other elements through relative position according to that anchor.
